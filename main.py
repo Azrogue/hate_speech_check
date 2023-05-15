@@ -1,12 +1,18 @@
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 import pandas as pd
 import torch
 from transformers import BertTokenizerFast
+from transformers import BertForSequenceClassification
+from transformers import TrainingArguments, Trainer
+# from datasets import load_dataset
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 
-
 # Charger les données
-df = pd.read_csv('chemin_vers_votre_fichier.csv')
+df = pd.read_csv('dataset/data.csv')
 
 # Sélectionner les colonnes pertinentes
 df = df[['test_case', 'label_gold', 'target_ident']]
